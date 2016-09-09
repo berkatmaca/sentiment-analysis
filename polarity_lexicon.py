@@ -155,7 +155,7 @@ class Polarity(object):
     dump(self.get_resultant(), output)
     output.close()
 
-def main(args):
+def main():
   pos_words = raw_input("Please provide the path for positive words' lexicon:\n")
   print '\n'
   neg_words = raw_input("Please provide the path for negative words' lexicon:\n")
@@ -165,4 +165,4 @@ def main(args):
   print instance.run()
 
 if __name__ == '__main__':
-    exit(main(argv))
+    exit(main())
