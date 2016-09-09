@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #-*- coding: utf-8 -*-
 
-from sys import exit, argv
+from sys import exit
 from pickle import dump
 from math import log10
 from pprint import pprint
