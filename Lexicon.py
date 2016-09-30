@@ -2,6 +2,7 @@
 #-*- coding: utf-8 -*-
 
 class Lexicon(object):
+  """ This class reads in polarity lexicon: positive and negative terms."""
   def __init__(self, pos_terms_path, neg_terms_path):
     self.pos_terms_path = pos_terms_path
     self.neg_terms_path = neg_terms_path
