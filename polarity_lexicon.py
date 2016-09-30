@@ -23,18 +23,20 @@ class Polarity:
     self.resultant_dict = dict()
     self.resultant_pos_list = list()
     self.resultant_neg_list = list()
-    self.indices_of_excellent = self.get_indices('excellent')
-    self.indices_of_poor = self.get_indices('poor')
-    self.window_for_excellent = self.create_window(self.indices_of_excellent)
-    self.window_for_poor = self.create_window(self.indices_of_poor)
     self.pos_dict = defaultdict(int)
     self.neg_dict = defaultdict(int)
     self.pinguin()
 
   def pinguin(self):
-    for word in self.window_for_excellent:
+    """Makes the program ready to run---creates
+    respective windows and fills in the dicts."""
+    indices_of_excellent = self.get_indices('excellent')
+    indices_of_poor = self.get_indices('poor')
+    window_for_excellent = self.create_window(indices_of_excellent)
+    window_for_poor = self.create_window(indices_of_poor)
+    for word in window_for_excellent:
       self.pos_dict[word] += 1
-    for word in self.window_for_poor:
+    for word in window_for_poor:
       self.neg_dict[word] += 1
     for word in self.corpus_word_list:
       self.corpus_word_dict[word] += 1
@@ -78,9 +80,6 @@ class Polarity:
       except ValueError:
         return result
       result.append(offset)
-
-  def get_index(self, word):
-    return self.corpus_word_list.index(word)
 
   def create_window(self, indices):
     """Consumes a list of integers that represent indices of
@@ -134,6 +133,7 @@ class Polarity:
     return (accuracy_neg + accuracy_pos)/(len(result_neg) + len(result_pos))
 
   def io(self):
+    """Input & Output"""
     pprint(self.resultant_dict)
     self.decouple_resultant_dict()
     self.resultant_pos_list.sort()
@@ -178,11 +178,14 @@ class Polarity:
         self.resultant_neg_list.append(k)
 
 def main():
-  pos_words = raw_input("Please provide the path for positive words' lexicon:\n")
+  pos_words = 'opinion-lexicon-English/positive-words.txt'
+  # pos_words = raw_input("Please provide the path for positive words' lexicon:\n")
   print '\n'
-  neg_words = raw_input("Please provide the path for negative words' lexicon:\n")
+  neg_words = 'opinion-lexicon-English/negative-words.txt'
+  # neg_words = raw_input("Please provide the path for negative words' lexicon:\n")
   print '\n'
-  corpus = raw_input("Please finally provide the path for corpus:\n")
+  corpus = 'sample.preprocessed.txt'
+  # corpus = raw_input("Please finally provide the path for corpus:\n")
   instance = Polarity(pos_words, neg_words, corpus)
   from time import time, clock
   start = clock()
